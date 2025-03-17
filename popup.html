@@ -1,0 +1,128 @@
+<!-- popup.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Gateway Validator</title>
+  <style>
+    body {
+      width: 320px;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+    }
+    .form-group {
+      margin-bottom: 12px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    .status {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 4px;
+    }
+    .info-box {
+      background-color: #e8f0fe;
+      border: 1px solid #4285f4;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+    }
+    .info-item {
+      margin-bottom: 5px;
+    }
+    .info-label {
+      font-weight: bold;
+      display: inline-block;
+      width: 100px;
+    }
+    .valid {
+      background-color: #d9f7d9;
+      color: #0d6e0d;
+    }
+    .invalid {
+      background-color: #ffdddd;
+      color: #d32f2f;
+    }
+    .warning {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+    #loadingIndicator {
+      text-align: center;
+      display: none;
+      margin: 10px 0;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 2s linear infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h2>Payment Gateway Validator</h2>
+  
+  <div id="merchantInfoContainer" class="info-box" style="display: none;">
+    <h3 style="margin-top: 0;">Merchant Information</h3>
+    <div class="info-item"><span class="info-label">Name:</span> <span id="extractedMerchantName">-</span></div>
+    <div class="info-item"><span class="info-label">ID:</span> <span id="extractedMerchantId">-</span></div>
+    <div class="info-item"><span class="info-label">Website:</span> <span id="extractedWebsite">-</span></div>
+  </div>
+  
+  <div class="form-group">
+    <label for="paymentGatewayUrl">Payment Gateway URL:</label>
+    <input type="text" id="paymentGatewayUrl" placeholder="Enter payment gateway URL">
+  </div>
+  
+  <button id="extractInfoBtn">Extract Merchant Info</button>
+  
+  <div id="loadingIndicator">
+    <div class="spinner"></div>
+    <p>Processing...</p>
+  </div>
+  
+  <div id="merchantEditContainer" style="display: none; margin-top: 15px;">
+    <div class="form-group">
+      <label for="merchantName">Merchant Name:</label>
+      <input type="text" id="merchantName">
+    </div>
+    <div class="form-group">
+      <label for="merchantId">Merchant ID:</label>
+      <input type="text" id="merchantId">
+    </div>
+    <button id="validateBtn">Validate Merchant</button>
+  </div>
+  
+  <div id="statusContainer" style="display: none;" class="status"></div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
